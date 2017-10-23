@@ -1,19 +1,26 @@
-@import url("../lib/swipe/swiper.min.css");
-
-  @images: '../images/menuTab'; 
+@images: '../images/menuTab'; 
 
 *{
 	margin: 0;
 	padding: 0;
 }
 
+html{
+	max-width: 750px; /*no*/
+}
 body{
 	font-family: "Microsoft Yahei";
 	background: #f1f1f1;
 }
-
+input{
+	font-family: "Microsoft Yahei";
+}
+html, body{
+	width: 100%; height: 100%;
+}
 a{
 	text-decoration: none;
+	color: #38f;
 }
 
 i{
@@ -24,11 +31,19 @@ li{
 	list-style: none;
 }
 
+input{
+	outline: none;
+}
+.container{
+	padding-bottom: 150px; /*px*/
+}
+
 .menuTab{
 	position: fixed;
 	bottom: 0;
 	width: 100%;
 	border-top: 1px solid #e1e1e1; /*no*/
+	z-index: 1;
 
 	ul{
 		display: flex;
@@ -44,7 +59,7 @@ li{
 
 			a{
 				display: block;
-				padding: 10px 0 20px;
+				padding: 10px 0 20px; /*px*/
 				font-size: 24px; /*px*/
 				color: #999;
 

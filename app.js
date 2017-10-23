@@ -65,7 +65,7 @@ if(isProd) {
 if (process.env.NODE_ENV == 'development') {
   let proxyMiddleware = require('http-proxy-middleware');
 
-  app.use('/mobile', proxyMiddleware({target: 'http://192.168.0.87:8082/', changeOrigin: true}));
+  app.use('/mobile', proxyMiddleware({target: 'https://weixin.100lending.com', changeOrigin: true}));
 }
 
 app.use(compression({ threshold: 0 }))

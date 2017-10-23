@@ -12,7 +12,7 @@ const config = {
   },
   output: {
     path: path.resolve(__dirname, '../dist'),
-    publicPath: '/dist',
+    publicPath: '/dist/',
     filename: '[name].[chunkhash:5].js',
   },
   resolve: {

@@ -1,15 +1,14 @@
 <template>
-<div>
+<div class="container">
 
-    <!--  <div class="swiper-container">
+     <div class="swiper-container">
         <div class="swiper-wrapper">
             <div class="swiper-slide" v-for="(item, index) in bannerList" :key="index">
               <a :href="item.url"><img :src='item.imgPath'></a>
             </div>
-        </div>
-       
+        </div>      
         <div class="swiper-pagination"></div>
-    </div> -->
+    </div>
 
     <div class="advantageCon">
       <a href="https://static.100lending.com/terminal/mobile/disclosure/about/index.html" class="advantage1"><span></span><i>国资背景</i></a>
@@ -84,7 +83,6 @@
 
  import {getConfig , getHomeData} from '../serviceData/getData'
 
-
   export default {
     data(){
       return {
@@ -117,16 +115,19 @@
           this.bannerList = data.bannerList;
           this.beginnerProductList = data.beginnerProductList;
           this.currentProduct = data.currentProduct;
-          this.planProductList = data.planProductList;    
+          this.planProductList = data.planProductList;              
 
-          //const swiper = require('../lib/swipe/swiper.min.js')
-          //console.log(document.querySelector('.swiper-container'))
-          // new swiper('.swiper-container', {
-          //     pagination: '.swiper-pagination',
-          //     mode:'horizontal',
-          //     autoplay: 2500,
-          //     autoplayDisableOnInteraction: false
-          // }); 
+          //var Swiper = require('../lib/swipe/swiper.js');
+
+          var Swiper = require("swiper");
+          require('swiper/dist/css/swiper.css');
+          
+          new Swiper ('.swiper-container', {
+              autoplay: 5000,
+              mode:'horizontal',
+              autoplayDisableOnInteraction:false,
+              pagination: '.swiper-pagination'
+          })
 
           var config = await getConfig();
           
