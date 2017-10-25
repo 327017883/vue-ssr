@@ -1,4 +1,7 @@
+@import url("../lib/swipe/swiper.min.css");
+
 @images: '../images/menuTab'; 
+@maxWidth: 750px;
 
 *{
 	margin: 0;
@@ -6,7 +9,8 @@
 }
 
 html{
-	max-width: 750px; /*no*/
+	max-width: @maxWidth; /*no*/
+	margin: 0 auto;
 }
 body{
 	font-family: "Microsoft Yahei";
@@ -44,6 +48,7 @@ input{
 	width: 100%;
 	border-top: 1px solid #e1e1e1; /*no*/
 	z-index: 1;
+	max-width: @maxWidth; /*no*/
 
 	ul{
 		display: flex;
@@ -83,3 +88,156 @@ input{
 		li:nth-child(4) a i.focus { background: url('@{images}/user_f.png') no-repeat center center / 44px; /*px*/ }
 	}
 }
+
+
+.productMenuTab{
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 2;
+
+	ul{
+		display: flex;
+		text-align: center;
+		background: #fff;		
+		z-index: 2;
+
+		li{
+			flex: 1;
+
+			height: 80px;
+			line-height: 80px;
+			font-size: 34px; /*px*/
+			position: relative;
+			color: #404040;
+		}
+		.focus{
+			color: #ff5156;
+		}
+		.focus:after{
+			position: absolute;
+			background: #ff5156;
+			content: '';
+			display: block;
+			height: 4px; /*px*/
+			width: 28%;
+			left: 50%;
+			margin-left: -14%;
+			bottom: 8px; 
+		}
+	}
+}
+
+/* 定期计划、定期直投列表*/
+.product-con{
+		margin-top: 80px;
+		overflow: hidden;
+
+		.product-list{
+			margin-top: 20px;
+			background: #fff;
+
+			a{
+				display: block;
+
+				.icons{
+					height: 48px;
+
+					span{
+						color: #fff;
+					    background: -webkit-linear-gradient(left,#fe8653,#ff4538);
+					    box-shadow: 0 0.1rem 0.5rem #fbc4c0;
+					    display: inline-block;
+					    height: 36px;
+					    line-height: 36px;
+					    border-bottom-right-radius: 10px;
+					    padding: 0 5px;
+					    font-size: 24px; /*px*/
+					}
+				}
+				.product-content{
+					padding: 0 20px;
+
+					.product-info{
+						display: flex;
+						border-bottom: 1px dashed #dcdcdc; /*px*/
+						padding: 10px 0 40px 0;
+
+						> div{
+							flex: 1;
+							text-align: center;
+
+							.bottom{
+								color: #999;
+								font-size: 24px; /*px*/
+							}
+						}
+
+						.left{
+							.top{
+								color: #ff5151;
+								font-size: 60px; /*px*/
+								height: 65px;
+	    						line-height: 58px;
+
+								font{
+									font-size: 36px; /*px*/
+								}
+							}
+
+							
+						}
+
+						.center{
+							.top{
+								color: #333;
+								font-size: 36px; /*px*/
+								margin-bottom: 20px;
+
+								font{
+									font-size: 24px; /*px*/
+								}
+							}
+						}
+
+						.right{
+							.top{
+								color: #333;
+								font-size: 36px; /*px*/
+								margin-bottom: 20px;
+
+								font{
+									font-size: 24px;
+								}
+							}
+						}
+					}
+
+					.progress{
+						display: flex;
+						height: 80px;
+						line-height: 80px;
+						color: #777;
+
+						> div{
+							flex: 1;
+						}
+
+						.right{
+							text-align: right;
+						}
+					}
+
+				}
+			}
+		}
+		.product-list.hasOver{
+			.product-info{
+				.left{
+					.top{
+						color: #ffc098;
+					}
+				}
+			}
+		}
+	} 

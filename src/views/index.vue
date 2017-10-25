@@ -117,10 +117,9 @@
           this.currentProduct = data.currentProduct;
           this.planProductList = data.planProductList;              
 
-          //var Swiper = require('../lib/swipe/swiper.js');
+          var Swiper = require('../lib/swipe/swiper.js');
 
-          var Swiper = require("swiper");
-          require('swiper/dist/css/swiper.css');
+          //var Swiper = require("swiper");          
           
           new Swiper ('.swiper-container', {
               autoplay: 5000,
