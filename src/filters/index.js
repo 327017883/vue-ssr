@@ -1,4 +1,6 @@
 
+import moment from 'moment'
+
 const toFixed = (num, l, tag2, tag) => {
 
     var arrNum = num.toString().split(".");
@@ -46,6 +48,11 @@ const price = (value,float,tag,status) =>{
     return formatNumber(value);
 }
 
+function dateFormat(value,formatString){
+    formatString = formatString || 'YYYY-MM-DD';
+    return moment(value).format(formatString);
+}
 export { 
-	price
+	price,
+    dateFormat
 }

@@ -10,7 +10,7 @@ import sporadicList from '../views/sporadicList.vue'
 
 Vue.use(Router)
 
-export default new Router({
+let router = new Router({
   mode: 'history',
   routes: [
   	{ 
@@ -21,7 +21,10 @@ export default new Router({
 	{ 
 		path: '/index', 
 		component: index, 
-		name: 'home' 
+		name: 'home',
+		meta: {
+			keepAlive: true
+		} 
 	},
 	//更多
     { 
@@ -39,19 +42,32 @@ export default new Router({
     {
     	path: '/product/currentDetail',
     	component: currentDetail,
-    	name: 'currentDetail'
+    	name: 'currentDetail',
+    	meta: {
+			keepAlive: true
+		} 
     },
     //定期计划
     {
     	path: '/product/productList',
     	component: productList,
-    	name: 'productList'
+    	name: 'productList',
+    	meta: {
+			keepAlive: true
+		} 
     },
     //定期直投
     {
     	path: '/product/sporadicList',
     	component: sporadicList,
-    	name: 'sporadicList'
+    	name: 'sporadicList',
+    	meta: {
+			keepAlive: true
+		} 
     }
   ]
-})
+});
+
+router.beforeEach((to, from, next) => { next(); });
+
+export default router

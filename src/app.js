@@ -11,7 +11,8 @@ Object.keys(filters).forEach(function(k) {
   Vue.filter(k, filters[k]);
 });
 
-Vue.component('menuTab', Vue.extend(require('@components/menuTab.vue')));
+Vue.component('menuTab', require('@components/menuTab.vue'));
+Vue.component('loadingBar', require('@components/loadingBar.vue'));
 
 sync(store, router)
 

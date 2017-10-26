@@ -1,5 +1,5 @@
 <template>
-<div class="container">
+<div class="container" v-cloak>
 
      <div class="swiper-container">
         <div class="swiper-wrapper">
@@ -33,7 +33,7 @@
       <div class="change-title"><i class="t02"></i>零钱计划<span>按日计息，高效撮合债权转让</span></div>
       <div class="change-content">
           <a href='javascript:;'>
-              <div class="c-title">每日万元收益 {{ ((this.currentProduct.annualRate + this.currentProduct.addAnnualRate)*100/360) | price(2)}} 元</div>
+              <div class="c-title">每日万元收益 {{ ((this.currentProduct.annualRate + this.currentProduct.addAnnualRate)*100/360) | price(2, 1)}} 元</div>
               <div class="change-sy">
                 {{ this.currentProduct.annualRate }}<span class="fu">%</span><span class="fu">+</span><span class="add">{{ this.currentProduct.addAnnualRate }}</span><span class="fu">%</span>
               </div>
@@ -47,7 +47,7 @@
       <div class="item" v-for="(item, index) in planProductList" :key="index">
         <a href='javascript:;'> 
           <div class="productList"> 
-            <div class="left"> <div class="leftTop">{{ item.annualRate }}<font>%</font><span v-if='item.addAnnualRate'>+{{item.addAnnualRate}}</span><font  v-if='item.addAnnualRate'>%</font></div> <div class="leftBottom">约定年化</div> </div> 
+            <div class="left"> <div class="leftTop">{{ item.annualRate | price(2, 1) }}<font>%</font><span v-if='item.addAnnualRate'>+{{item.addAnnualRate}}</span><font  v-if='item.addAnnualRate'>%</font></div> <div class="leftBottom">约定年化</div> </div> 
             <div class="mid"> <span>{{ item.deadline }}<i>{{item.repayType>1?"个月":"天"}}</i></span> 项目期限 </div> 
             <div class="right"> 
                 <div class="loading-container"> 
@@ -81,7 +81,7 @@
 
 <script>
 
- import {getConfig , getHomeData} from '../serviceData/getData'
+ import {getHomeData} from '../serviceData/getData'
 
   export default {
     data(){
@@ -96,7 +96,7 @@
     },
     mounted(){
 
-      this.initData();      
+      this.initData();
     },
     preFetch () {
       return this.methods.meta()
@@ -127,11 +127,12 @@
               autoplayDisableOnInteraction:false,
               pagination: '.swiper-pagination'
           })
-
-          var config = await getConfig();
           
-          this.config = config;
-          
+      }
+    },
+    route: {
+      data(){
+        console.log('route')
       }
     }
   }

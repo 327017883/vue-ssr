@@ -2,9 +2,9 @@
 <div class="container">
 	<div class="currentDetail">
 		<div>
-			<div>5.5<font>%</font><font>+</font><span>0.4</span><font>%</font></div>
+			<div>{{product.annualRate}}<font>%</font><font>+</font><span>{{product.addAnnualRate || 0}}</span><font>%</font></div>
 			<div>约定年化利率</div>
-			<div><i class="rateTips-ico"></i>按日计息，每日万元收益1.63元</div>
+			<div><i class="rateTips-ico"></i>按日计息，每日万元收益{{ ((product.annualRate + product.addAnnualRate)/100*10000/360) | price(2)}}元</div>
 		</div>
 		<div class="currentAmount">
 			<div>
@@ -13,23 +13,27 @@
 				<div>
 					<img src="../images/currentDetail/tipLeft-ico.png">
 					<div>今日投资</div>
-					<div>2017-10-24</div>
+					<div v-cloak>{{ this.today | dateFormat}}</div>
 				</div>
 				<div>
 					<img src="../images/currentDetail/tipCenter-ico.png">
 					<div>开始计息</div>
-					<div>2017-10-25</div>
+					<div>{{ tomorrow | dateFormat}}</div>
 				</div>
 				<div>
 					<img src="../images/currentDetail/tipRight-ico.png">
 					<div>查看收益</div>
-					<div>2017-10-26</div>
+					<div>{{afterTomorrow | dateFormat }}</div>
 				</div>
 			</div>
 
-			<div class="surplusAmount">剩余额度 <span>64,913</span> 元</div>
+			<div class="surplusAmount" v-if="product.status>2">当前额度已售罄</div>
+            <div class="surplusAmount" v-else>剩余额度 <span>{{product.surplusAmount | price}}</span> 元</div>
 
-			<div class="gotoBuyCurrent"><a href="javascript:;">立即投资</a></div>
+			<div class="gotoBuyCurrent">
+				<a v-if="product.status<=2" href="javascript:;">立即投资</a>
+                <a v-else class='disabled' href="javascript:;">敬请期待下次额度</a>
+			</div>
 		</div>
 	</div>
 
@@ -41,14 +45,39 @@
 
 <script>
 
+	import {getCurrentDetail} from '../serviceData/getData'
+
 	import menuProduct from '../components/menuProduct.vue'
 
 	module.exports= {
 		data(){
 			return {
-
+				product: {},
+				today: ''
 			}
 		},
+		computed:{
+			tomorrow(){
+				return this.today && this.today + 1000*60*60*24; 
+			},
+			afterTomorrow(){
+				return this.today && this.today + 1000*60*60*24*2;
+			}
+		},
+		mounted(){
+
+	      this.initData();      
+	    },
+	    methods:{
+	    	async initData(){
+
+		    	let data = await getCurrentDetail();
+
+		    	this.product = data.data;
+		    	this.today = data.serviceDate;
+		    	
+		    }
+	    },	    
 		components:{
 			menuProduct: menuProduct
 		}
