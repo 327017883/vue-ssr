@@ -57,6 +57,8 @@
 	    	async initData(){
 	    		let data = await getProductList();
 	    		this.productList = data.data.productList;
+
+	    		this.hideLoading();
 	    	}
 	    },
 		components:{

@@ -2,7 +2,7 @@
 <div class="container">
 	<div class="currentDetail">
 		<div>
-			<div>{{product.annualRate}}<font>%</font><font>+</font><span>{{product.addAnnualRate || 0}}</span><font>%</font></div>
+			<div>{{product.annualRate || 0}}<font>%</font><font>+</font><span>{{product.addAnnualRate || 0}}</span><font>%</font></div>
 			<div>约定年化利率</div>
 			<div><i class="rateTips-ico"></i>按日计息，每日万元收益{{ ((product.annualRate + product.addAnnualRate)/100*10000/360) | price(2)}}元</div>
 		</div>
@@ -57,7 +57,7 @@
 			}
 		},
 		computed:{
-			tomorrow(){
+			tomorrow(){				
 				return this.today && this.today + 1000*60*60*24; 
 			},
 			afterTomorrow(){
@@ -75,6 +75,8 @@
 
 		    	this.product = data.data;
 		    	this.today = data.serviceDate;
+
+		    	this.hideLoading();
 		    	
 		    }
 	    },	    

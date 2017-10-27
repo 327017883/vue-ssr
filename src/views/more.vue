@@ -74,7 +74,15 @@
 </template>
 
 <script>
-	
+
+
+	module.exports= {
+
+		mounted(){
+
+	      this.hideLoading();      
+	    }
+	}
 </script>
 
 <style lang="less">

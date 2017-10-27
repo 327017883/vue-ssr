@@ -33,6 +33,9 @@
 				mobilephone: ''
 			}
 		},
+		mounted(){
+			this.hideLoading();
+		},
 		methods:{
 			reglog(){
 

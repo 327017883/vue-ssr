@@ -57,6 +57,8 @@
 	    	async initData(){
 	    		let data = await getSporadictList();
 	    		this.productList = data.data.productList;
+
+	    		this.hideLoading();
 	    	}
 	    },
 		components:{

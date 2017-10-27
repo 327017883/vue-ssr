@@ -20,7 +20,8 @@ const config = {
       'public': path.resolve(__dirname, '../public'),
       'src': path.resolve(__dirname, '../src'),
       '@components': path.resolve(__dirname, '../src/components'),
-      'assets': path.resolve(__dirname, '../src/assets')
+      'assets': path.resolve(__dirname, '../src/assets'),
+      'vue$': 'vue/dist/vue.common.js'
     }
   },
   module: {

@@ -1,5 +1,5 @@
 <template>
-<div class="container" v-cloak>
+<div class="container">
 
      <div class="swiper-container">
         <div class="swiper-wrapper">
@@ -94,9 +94,8 @@
         config: ''
       }
     },
-    mounted(){
-
-      this.initData();
+    created(){
+      this.initData(); 
     },
     preFetch () {
       return this.methods.meta()
@@ -110,6 +109,7 @@
         }
       },
       async initData(){
+
           var data = await getHomeData();
 
           this.bannerList = data.bannerList;
@@ -117,16 +117,16 @@
           this.currentProduct = data.currentProduct;
           this.planProductList = data.planProductList;              
 
-          var Swiper = require('../lib/swipe/swiper.js');
-
-          //var Swiper = require("swiper");          
+          var Swiper = require('../lib/swipe/swiper.js');     
           
           new Swiper ('.swiper-container', {
               autoplay: 5000,
               mode:'horizontal',
               autoplayDisableOnInteraction:false,
               pagination: '.swiper-pagination'
-          })
+          });
+
+          this.hideLoading();
           
       }
     },

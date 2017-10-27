@@ -23,7 +23,7 @@ let router = new Router({
 		component: index, 
 		name: 'home',
 		meta: {
-			keepAlive: true
+			keepAlive: false
 		} 
 	},
 	//更多
@@ -44,7 +44,7 @@ let router = new Router({
     	component: currentDetail,
     	name: 'currentDetail',
     	meta: {
-			keepAlive: true
+			keepAlive: false
 		} 
     },
     //定期计划
@@ -53,7 +53,7 @@ let router = new Router({
     	component: productList,
     	name: 'productList',
     	meta: {
-			keepAlive: true
+			keepAlive: false
 		} 
     },
     //定期直投
@@ -62,7 +62,7 @@ let router = new Router({
     	component: sporadicList,
     	name: 'sporadicList',
     	meta: {
-			keepAlive: true
+			keepAlive: false
 		} 
     }
   ]

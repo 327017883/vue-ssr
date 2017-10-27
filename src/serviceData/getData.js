@@ -15,18 +15,6 @@ axios.interceptors.request.use(function (config) {
     return Promise.reject(error);
   });
 
-// 响应时拦截
-axios.interceptors.response.use(function (response) {
-
-    // 返回响应时做一些处理
-    return response;
-    
-  }, function (error) {
-    // 当响应异常时做一些处理
-    return Promise.reject(error);
-  });
-
-
 if (process.env.NODE_ENV == 'development') {
 
 	var getConfig =  async() => {
