@@ -85,7 +85,7 @@
 	}
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 
 	@more: '../images/more'; 
 	@common: '../images/common'; 

@@ -105,6 +105,7 @@ app.get('*', (req, res) => {
   })
 
   renderStream.on('error', err => {
+   
     if(err && err.code == '404'){
       res.status(404).end('404, Page Not Found')
       return
@@ -112,7 +113,12 @@ app.get('*', (req, res) => {
     res.status(500).end('500 Internal Error')
     console.log(err)
   })
-})
+});
+
+app.post('/user/login.json', function(req, res){
+
+  res.send({code: 1, message: '操作成功', data: '暂无数据' });
+});
 
 
 const PORT = process.env.PORT || 8086

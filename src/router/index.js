@@ -1,5 +1,14 @@
+const path = require('path')
+
 import Vue from 'vue'
 import Router from 'vue-router'
+
+// const index = resolve => require(['../views/index.vue'], resolve);
+// const more = resolve => require(['../views/more.vue'], resolve);
+//const login = resolve => require(['@views/login.vue'], resolve);
+// const currentDetail = resolve => require(['../views/currentDetail.vue'], resolve);
+// const productList = resolve => require(['../views/productList.vue'], resolve);
+// const sporadicList = resolve => require(['../views/sporadicList.vue'], resolve);
 
 import index from '../views/index.vue'
 import more from '../views/more.vue'

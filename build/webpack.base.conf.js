@@ -14,6 +14,7 @@ const config = {
     path: path.resolve(__dirname, '../dist'),
     publicPath: '/dist/',
     filename: '[name].[chunkhash:5].js',
+    chunkFilename: '[name].chunk[id].js'
   },
   resolve: {
     alias: {
@@ -21,7 +22,8 @@ const config = {
       'src': path.resolve(__dirname, '../src'),
       '@components': path.resolve(__dirname, '../src/components'),
       'assets': path.resolve(__dirname, '../src/assets'),
-      'vue$': 'vue/dist/vue.common.js'
+      'vue$': 'vue/dist/vue.common.js',
+      '@views': path.resolve(__dirname, '../src/views')
     }
   },
   module: {

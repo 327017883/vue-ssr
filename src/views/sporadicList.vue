@@ -15,7 +15,7 @@
 							<div class="bottom">期限</div>
 						</div>
 						<div class="right">
-							<div class="top">{{product.surplusAmount}}<font>元</font></div>
+							<div class="top">{{product.surplusAmount | price}}<font>元</font></div>
 							<div class="bottom">剩余额度</div>
 						</div>
 					</div>
@@ -66,9 +66,3 @@
 		}
 	}
 </script>
-
-<style lang="less">
-
-	@more: '../images/more'; 
-
-</style>

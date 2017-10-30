@@ -5,9 +5,15 @@ const time = new Date().getTime();
 // 请求时的拦截
 axios.interceptors.request.use(function (config) {
 
-    // 发送请求之前做一些处理 
-    config.url = config.url + 'time=' + time;
-
+    // 发送请求之前做一些处理
+    if(config.method == 'get'){
+    	config.url = config.url + 'time=' + time;
+    }
+    else{
+    	config.url = config.url + 'time=' + time + '&' + config.data;
+    	config.data = '';
+    }
+    
     return config;
 
   }, function (error) {
@@ -41,6 +47,23 @@ if (process.env.NODE_ENV == 'development') {
 		var res = await axios.get('/mobile/v140/product/listing.json?', { params: { pageSize: 20,  productType: 1, pageNum: 0}});
 		return res.data;
 	};
+
+	var login = async(o) => {
+		var qs = require('querystring');		
+		var res = await axios.post('/user/login.json?', qs.stringify({
+		    loginId: o.loginId,  
+			password: o.password,
+			captchaCode: '66666'
+		}), {
+			headers: { 
+				'phoneuuid': 'wx',
+				'Authorization': '', 
+				//"Content-Type": "application/json;charset=utf-8",
+				"Content-Type":'application/x-www-form-urlencoded'
+			}
+		});
+		return res.data;
+	}
 }
 
 export { 
@@ -48,6 +71,7 @@ export {
 	getHomeData,
 	getCurrentDetail,
 	getProductList,
-	getSporadictList
+	getSporadictList,
+	login
 };
 

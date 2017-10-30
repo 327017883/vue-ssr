@@ -12,7 +12,7 @@
 				<em  v-bind:class='{eyRed: showEye == 1 ? true: false}' class="eye-icon" @click="showPsw($event)"></em>
 			</div>
 			<i class="error">{{error}}</i>
-			<a href="javascript:;" class="btn login-btn">立即登录</a>
+			<a href="javascript:;" class="btn login-btn" @click='login'>立即登录</a>
 			<a href="javascript:;" class="btn register-btn">注册领福利</a>
 			<a href="javascript:;" class="forget-btn">忘记密码？</a>
 		</div>
@@ -20,7 +20,9 @@
 	</div>
 </template>
 
-<script>
+<script>   
+	import {login} from '../serviceData/getData'
+
 	export default{
 		data(){
 			return{
@@ -35,6 +37,8 @@
 		},
 		mounted(){
 			this.hideLoading();
+
+			require('../lib/rsa.js');
 		},
 		methods:{
 			reglog(){
@@ -70,12 +74,46 @@
 				};
 
 				this[numObj[num]] = typeObj[type];
+			},
+			login(){
+				if(this.check()){
+
+					login({
+						loginId: this.mobilephone.replace(/\s/g,''),
+						password: RSAUtils.pwdEncode(this.password)
+					}).then((res) => {
+						if(res.code == 1){
+							this.$router.replace('/');
+						}
+					});
+				}
+				
+			},
+			check(){
+
+				var mobilephone = this.mobilephone.replace(/\s/g,'');
+
+				if(mobilephone == ''){
+					this.error = '请输入手机号码';
+					return !1;	
+				}
+				else if(!/^[1][34587][0-9]{9}$/g.test(mobilephone) || mobilephone.length > 11){
+
+					this.error = "手机号错误，请核对";
+					return !1;
+				}
+				if(this.password == ''){
+					this.error = '请输入密码';
+					return !1;	
+				}
+				this.error = '';
+				return !0;
 			}
 		}
 	}
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 
 	@login: '../images/login'; 
 	

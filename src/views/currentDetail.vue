@@ -86,7 +86,7 @@
 	}
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 
 	@currentDetail: '../images/currentDetail'; 
 
