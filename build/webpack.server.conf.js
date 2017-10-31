@@ -1,7 +1,7 @@
 const webpack = require('webpack')
 const base = require('./webpack.base.conf')
 
-process.env.HOST = '192.168.0.87';
+//process.env.HOST = '192.168.0.87';
 
 const config = Object.assign({}, base, {
   target: 'node',
