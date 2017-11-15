@@ -115,16 +115,26 @@ app.get('*', (req, res) => {
   })
 });
 
+//解密
+var NodeRSA = require('node-rsa');
+var privateKey = fs.readFileSync("src/rsa-key/private.key","utf-8"); 
+var key = new NodeRSA(privateKey.replace(/\r\n/g, '\n'));
+key.setOptions({encryptionScheme: 'pkcs1'});
+
 app.post('/user/login.json', function(req, res){
+
+  var password = key.decrypt(req.query.password, 'utf8');
+  var loginId = key.decrypt(req.query.loginId, 'utf8');
+
+  console.log('手机号为：' + loginId)
+  console.log('登录密码为：' + password)
 
   res.send({code: 1, message: '操作成功', data: '暂无数据' });
 });
 
-
 const PORT = process.env.PORT || 8086
 const HOST = process.env.HOST || 'localhost'
 
-
 app.listen(PORT, HOST, () => {
-  console.log(`server started at ${HOST}:${PORT} `)
+  console.log(`server started at ${HOST}:${PORT} `);
 })

@@ -15,6 +15,12 @@
 			<a href="javascript:;" class="btn login-btn" @click='login'>立即登录</a>
 			<a href="javascript:;" class="btn register-btn">注册领福利</a>
 			<a href="javascript:;" class="forget-btn">忘记密码？</a>
+			<textarea ref="PUBLIC" style='display: none;'>-----BEGIN PUBLIC KEY-----
+			MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCYhZ+eNkOZMf1DbfOVBRQhRQec
+			/s5KW47a0hEY1nYNWx9rmJdwCeFtcTFaIPFwfcEvR3uGOkiNR6wq145xkNWLcMgy
+			zE9+5q+oHOh1yLSJmvJzHHfMZnswTWhpyE/pAAPyGfu3X5sPP+aCBii1cst+mtjK
+			/FJRR5PophbGzqU3+wIDAQAB
+			-----END PUBLIC KEY-----</textarea>
 		</div>
 		<menuTab focus='3'></menuTab>  
 	</div>
@@ -36,9 +42,10 @@
 			}
 		},
 		mounted(){
-			this.hideLoading();
 
-			require('../lib/rsa.js');
+			this.hideLoading();
+			this.JSEncrypt = require('jsencrypt');
+
 		},
 		methods:{
 			reglog(){
@@ -76,18 +83,26 @@
 				this[numObj[num]] = typeObj[type];
 			},
 			login(){
+
 				if(this.check()){
 
+					//加密
+					var encrypt = new this.JSEncrypt.JSEncrypt();
+					var publicKey =	this.$refs.PUBLIC.value;
+					encrypt.setPublicKey(publicKey);
+
+					var psw = encrypt.encrypt(this.password);
+					var mobile = encrypt.encrypt(this.mobilephone.replace(/\s/g,''));
+
 					login({
-						loginId: this.mobilephone.replace(/\s/g,''),
-						password: RSAUtils.pwdEncode(this.password)
+						loginId: mobile,
+						password: psw
 					}).then((res) => {
 						if(res.code == 1){
-							this.$router.replace('/');
+							console.log('登录成功');
 						}
 					});
-				}
-				
+				}				
 			},
 			check(){
 

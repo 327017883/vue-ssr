@@ -5,7 +5,6 @@ import router from './router/index'
 import { sync } from 'vuex-router-sync'
 import axios from 'axios'
 
-
 import * as filters from './filters/index';
 
 Object.keys(filters).forEach(function(k) {

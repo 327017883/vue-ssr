@@ -51,9 +51,8 @@ if (process.env.NODE_ENV == 'development') {
 	var login = async(o) => {
 		var qs = require('querystring');		
 		var res = await axios.post('/user/login.json?', qs.stringify({
-		    loginId: o.loginId,  
-			password: o.password,
-			captchaCode: '66666'
+		    loginId: o.loginId,
+			password: o.password
 		}), {
 			headers: { 
 				'phoneuuid': 'wx',
